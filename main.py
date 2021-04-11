@@ -1,3 +1,5 @@
+from collections import deque
+
 def look_and_say(n):
   old_sequence = "1"
   sequence = "1"
@@ -20,9 +22,30 @@ def look_and_say(n):
     i+=1
   return sequence
 
-print("hi")
+#111221
 print(look_and_say(4))
 
+def shortest_path(s):
+  stack = deque()
+  #dont need the leading /
+  s = s[1:]
+  while len(s) > 0:
+    el = s[:s.find('/')]
+    if el == '..':
+      stack.pop()
+    elif el == '.':
+      pass 
+    else: 
+      stack.append(el)
+    #print(el)
+    #cut out el
+    s = s[s.find('/')+1:]
+  final_path = ''
+  while len(stack) > 0:
+    ele = stack.popleft()
+    final_path = "{}/{}".format(final_path,ele)
+  final_path += '/'
+  return final_path 
 
-
-
+#/usr/bin/
+print(shortest_path("/usr/bin/../bin/./scripts/../"))
